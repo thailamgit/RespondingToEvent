@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+type ButtonProps = {
+  onClick: () => void
+  children: string
+}
+function Button({onClick, children}: ButtonProps) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <button onClick={onClick}>{children}</button>
+  )
+}
+type PlayButtonProps = {
+  movieName: string
+}
+function PlayButton({movieName}: PlayButtonProps) {
+  function handlePlayClick() {
+    alert('Now playing '+ movieName +' !')
+  }
+  return (
+    <Button onClick={handlePlayClick}>
+    {`Play ${movieName}`}
+    </Button>
+  )
 }
 
-export default App;
+function UpLoadButton() {
+  return (
+    <Button onClick={() => alert('Uploading!')}>
+      Upload image
+    </Button>
+  )
+}
+
+export default function Toolbar() {
+  return(
+    <div>
+      <PlayButton movieName="Kiki's delivery service"/>
+      <UpLoadButton/>
+    </div>
+  )
+}
