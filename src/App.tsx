@@ -1,39 +1,39 @@
+
+export default function App() {
+  return (
+    <Toolbar
+      onPlayMovie={() => alert('Playing!')}
+      onUpLoadImage={() => alert('Uploading!')}
+    />
+  )
+}
+
 type ButtonProps = {
   onClick: () => void
   children: string
 }
-function Button({onClick, children}: ButtonProps) {
-  return (
-    <button onClick={onClick}>{children}</button>
-  )
-}
-type PlayButtonProps = {
-  movieName: string
-}
-function PlayButton({movieName}: PlayButtonProps) {
-  function handlePlayClick() {
-    alert('Now playing '+ movieName +' !')
-  }
-  return (
-    <Button onClick={handlePlayClick}>
-    {`Play ${movieName}`}
-    </Button>
-  )
-}
 
-function UpLoadButton() {
-  return (
-    <Button onClick={() => alert('Uploading!')}>
-      Upload image
-    </Button>
-  )
-}
-
-export default function Toolbar() {
+function Button ({onClick, children}: ButtonProps){
   return(
+    <button onClick={onClick}>
+      {children}
+    </button>
+  )
+}
+
+type ToolbarProps = {
+  onPlayMovie: () => void
+  onUpLoadImage: () => void
+}
+function Toolbar ({onPlayMovie, onUpLoadImage}:ToolbarProps){
+  return (
     <div>
-      <PlayButton movieName="Kiki's delivery service"/>
-      <UpLoadButton/>
+      <Button onClick={onPlayMovie}>
+        Play movie
+      </Button>
+      <Button onClick={onUpLoadImage}>
+        Upload image
+      </Button>
     </div>
   )
 }
